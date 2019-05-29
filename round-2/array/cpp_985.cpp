@@ -9,23 +9,32 @@ public:
         for (int i = 0; i < queries.size(); i++) {
             int idx = queries[i][1];
             int val = queries[i][0];
-            int tmp = A[idx] + val;
-            bool isEven = (tmp % 2 == 0);
+            // int tmp = A[idx] + val;
+            // bool isEven = (tmp % 2 == 0);
+            // if (A[idx] % 2 == 0) {
+            //     if (isEven) {
+            //         initSum += val;
+            //     }
+            //     else {
+            //         initSum -= A[idx];
+            //     }
+            // }
+            // else{
+            //     if (isEven) {
+            //         // odd -> even
+            //         initSum += tmp;
+            //     }
+            // }
+            // A[idx] = tmp;
+            
+            // From one post, this is more clever, but didn't improve runtime/mem usage (weird)
             if (A[idx] % 2 == 0) {
-                if (isEven) {
-                    initSum += val;
-                }
-                else {
-                    initSum -= A[idx];
-                }
+                initSum -= A[idx];
             }
-            else{
-                if (isEven) {
-                    // odd -> even
-                    initSum += tmp;
-                }
+            A[idx] += val;
+            if (A[idx] % 2 == 0) {
+                initSum += A[idx];
             }
-            A[idx] = tmp;
             res.push_back(initSum);
         }
         return res;
