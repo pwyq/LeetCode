@@ -9,6 +9,7 @@ public:
         for (auto c : A[0]) {
             res.push_back(string(1, c));
         }
+        int RES_SIZE = res.size();
         // // store the 1st one as answer
         // // loop thru each word
         // //  compare each character with answer string
@@ -36,6 +37,21 @@ public:
                     break;
                 }
             }
+            if (res.size() > A[i].size()) {
+                int diff = RES_SIZE - res.size();   // compensate
+                for (int m = A[i].size()-diff; m < res.size(); m++) {
+                    size_t found = A[i].find(res[m]);
+                    if (found == string::npos) {
+                        for (int i = 0; i < res.size(); i++) {
+                            if (res[i] == res[m]) {
+                                res.erase(res.begin()+m);
+                                m--;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
         return res;
     }
@@ -47,3 +63,6 @@ public:
 // ["bbddabab","cbcddbdd","bbcadcab","dabcacad","cddcacbc","ccbdbcba","cbddaccc","accdcdbb"]
 // ["bella","label","roller"]
 // ["cool","lock","cook"]
+// ["abcdefg", "abdg"]
+// ["abcdf", "ba"]
+// ["ab", "bacdefg"]
