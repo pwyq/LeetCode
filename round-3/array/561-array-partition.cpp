@@ -1,0 +1,15 @@
+// this question is confusing
+//
+
+class Solution {
+public:
+    int arrayPairSum(vector<int>& nums) {
+        std::sort(nums.begin(), nums.end());
+
+        int res = 0;
+        for (int i = 0; i < nums.size(); i += 2) {
+            res += min(nums[i], nums[i+1]);
+        }
+        return res;
+    }
+};
