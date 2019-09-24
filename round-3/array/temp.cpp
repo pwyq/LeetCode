@@ -4,57 +4,24 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <climits>
 using namespace std;
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
-        // this looks like a variant of the water-holding problem from TU Delft CG Lab1
-        
-        // vector<int> diffs;
-        int size = prices.size();
-        int cnt = 0;
-        for (int i = 1; i < size; i++) {
-            int diff = prices[i] - prices[i-1];
-            if (diff > 0) {
-                cnt += diff;
+    int findLengthOfLCIS(vector<int>& nums) {
+        if (nums.size() == 0 || nums.size() == 1) {
+            return nums.size();
+        }
+        int longest = -1;
+        for (int i = 0; i < nums.size(); i++) {
+            int start = i;
+            while (nums[i+1] > nums[i]) {
+                if ((i-start) > longest)
+                    longest = i-start;
+                i++;
             }
         }
-        return cnt;
-        /*
-        int size = prices.size();
-        vector<int> l(size, 0);
-        vector<int> r(size, 0);
-        
-        cout << "size = " << size << endl;
-        
-        int l_min = prices[0];
-        l[0] = l_min;
-        for (int i = 1; i < size; i++) {
-            if (l_min > prices[i]) {
-                l_min = prices[i];                
-            }
-            l[i] = l_min;
-        }
-        
-        int r_max = prices[size-1];
-        r[size-1] = r_max;
-        for (int i = size-2; i >= 0; i--) {
-            if (r_max < prices[i]) {
-                r_max = prices[i];                
-            }
-            r[i] = r_max;
-        }
-        
-        vector<int> buy;
-        for (int i = 0; i < size; i++) {
-            int diff = r[i] - l[i];
-            cout << "on day " << i << ", buy = " << l[i] << ", sell = " << r[i] << endl;
-            if (diff > 0)
-                buy.push_back(diff);
-        }
-
-        return std::accumulate(buy.begin(), buy.end(), 0);
-        */
+        return longest+1;
     }
 };
 
@@ -86,11 +53,14 @@ vector<int> stringToIntegerVector(string input) {
 }
 
 int main() {
-        vector<int> prices = {7,1,5,3,6,4,7,6,4,3,1};
-        
-        int ret = Solution().maxProfit(prices);
+    string line;
+    while (getline(cin, line)) {
+        vector<int> nums = stringToIntegerVector(line);
+
+        int ret = Solution().findLengthOfLCIS(nums);
 
         string out = to_string(ret);
         cout << out << endl;
+    }
     return 0;
 }
