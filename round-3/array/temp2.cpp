@@ -7,36 +7,20 @@
 #include <climits>
 #include <map>
 using namespace std;
-
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        map<int, int> t;
-        print_map(t);
-        for (int i = 0; i < nums.size(); i++) {
-            cout << "i = " << i << endl;
-            t.insert({nums[i], i});
-            print_map(t);
-
-            int diff = target - nums[i];
-            auto it = t.find(diff);
-            if (it != t.end()) {
-                return {i, it->second};
-            }
-            else {
-                cout << it->first << ", " << it->second << endl;
-            }
+    int searchInsert(vector<int>& nums, int target) {
+        int n = nums.size();
+        if (target < nums[0]) return 0;
+        if (target > nums[n-1]) return n;
+        
+        int res = -1;
+        for (int i = 0; i < n-1; i++) {
+            if (nums[i] == target) return i;
+            if (nums[i] <= target && target <= nums[i+1])
+                res = i+1;
         }
-        return {0,0};
-    }
-    void print_map(map<int, int> y) {
-        for (auto const& x : y)
-        {
-            std::cout << x.first  // string (key)
-                      << ':'
-                      << x.second // string's value
-                      << std::endl ;
-        }
+        return res;
     }
 };
 
@@ -71,33 +55,16 @@ int stringToInteger(string input) {
     return stoi(input);
 }
 
-string integerVectorToString(vector<int> list, int length = -1) {
-    if (length == -1) {
-        length = list.size();
-    }
-
-    if (length == 0) {
-        return "[]";
-    }
-
-    string result;
-    for(int index = 0; index < length; index++) {
-        int number = list[index];
-        result += to_string(number) + ", ";
-    }
-    return "[" + result.substr(0, result.length() - 2) + "]";
-}
-
 int main() {
     string line;
     while (getline(cin, line)) {
         vector<int> nums = stringToIntegerVector(line);
         getline(cin, line);
         int target = stringToInteger(line);
+        
+        int ret = Solution().searchInsert(nums, target);
 
-        vector<int> ret = Solution().twoSum(nums, target);
-
-        string out = integerVectorToString(ret);
+        string out = to_string(ret);
         cout << out << endl;
     }
     return 0;
