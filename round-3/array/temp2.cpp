@@ -7,21 +7,59 @@
 #include <climits>
 #include <map>
 using namespace std;
+
 class Solution {
 public:
-    int searchInsert(vector<int>& nums, int target) {
-        int n = nums.size();
-        if (target < nums[0]) return 0;
-        if (target > nums[n-1]) return n;
-        
-        int res = -1;
-        for (int i = 0; i < n-1; i++) {
-            if (nums[i] == target) return i;
-            if (nums[i] <= target && target <= nums[i+1])
-                res = i+1;
+    vector<int> deckRevealedIncreasing(vector<int>& deck) {
+        if (deck.size() == 0) return {};
+        sort(deck.begin(), deck.end());// deck now is known deck
+
+        vector<int> output_deck;
+
+//        output_deck.push_back(deck[deck.size()-1]);
+        while (deck.size() > 0) {
+            if (output_deck.size() > 0) {                
+                cout << "--------------------------- 1\n";
+                print_vec(output_deck);
+                print_vec(deck);
+                int temp = output_deck[output_deck.size()-1];
+                output_deck.insert(output_deck.begin(), temp);
+                cout << "--------------------------- 1.5\n";
+                print_vec(output_deck);
+                print_vec(deck);
+                output_deck.pop_back();
+                cout << "--------------------------- 2\n";
+                print_vec(output_deck);
+                print_vec(deck);
+            }
+
+            output_deck.insert(output_deck.begin(), deck[deck.size()-1]);
+            deck.pop_back();
+            cout << "--------------------------- 3\n";
+            print_vec(output_deck);
+            print_vec(deck);
         }
-        return res;
+
+        return output_deck;
     }
+
+    void print_vec(vector<int> v) {
+        for (int i : v)
+            cout << i << " ";
+        cout << endl;
+    }
+
+    // vector<int> forwardHelper(vector<int> deck) {
+    //     vector<int> a;
+    //     while (deck.size() > 0) {
+    //         a.push_back(deck[0]);
+    //         deck.erase(deck.begin());
+    //         int temp = deck[0];
+    //         deck.push_back(temp);
+    //         deck.erase(deck.begin());
+    //     }
+    //     return a;
+    // }
 };
 
 void trimLeftTrailingSpaces(string &input) {
@@ -51,21 +89,29 @@ vector<int> stringToIntegerVector(string input) {
     return output;
 }
 
-int stringToInteger(string input) {
-    return stoi(input);
+string integerVectorToString(vector<int> list, int length = -1) {
+    if (length == -1) {
+        length = list.size();
+    }
+
+    if (length == 0) {
+        return "[]";
+    }
+
+    string result;
+    for(int index = 0; index < length; index++) {
+        int number = list[index];
+        result += to_string(number) + ", ";
+    }
+    return "[" + result.substr(0, result.length() - 2) + "]";
 }
 
 int main() {
-    string line;
-    while (getline(cin, line)) {
-        vector<int> nums = stringToIntegerVector(line);
-        getline(cin, line);
-        int target = stringToInteger(line);
-        
-        int ret = Solution().searchInsert(nums, target);
+        vector<int> deck = {17,13,11,2,3,5,7};
 
-        string out = to_string(ret);
+        vector<int> ret = Solution().deckRevealedIncreasing(deck);
+
+        string out = integerVectorToString(ret);
         cout << out << endl;
-    }
     return 0;
 }
