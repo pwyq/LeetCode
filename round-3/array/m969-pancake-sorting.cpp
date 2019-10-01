@@ -19,10 +19,12 @@ public:
         for (x = A.size(); x > 0; --x) {
             for (i = 0; A[i] != x; ++i);
             // cout << "x = " << x << ", A[i] = " << A[i] << endl;
+            // first reverse, we put x (current maximum) to A[0]
             if (i != 0) {   // we don't want to push 1 on the stack, same below       
                 reverse(A.begin(), A.begin() + i + 1);
                 res.push_back(i + 1);
             }
+            /// second reverse, we put x to A[x-1]
             if (x != 1) {                
                 reverse(A.begin(), A.begin() + x);
                 res.push_back(x);
