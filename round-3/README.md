@@ -20,3 +20,13 @@ Array-Easy                       HashTable-Easy
 ```
 Easy: do as many as you can per day
 Medium: do one to two per day
+
+
+# Log
+Started on Sept 23
+
+| Category | Easy | Medium | Hard |
+|:--------:|:----:|:------:|:----:|
+| Array | Sept 27 | | |
+| Hash Table | Oct 2 | | |
+| Linked List | | | |
