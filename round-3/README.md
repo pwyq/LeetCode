@@ -7,6 +7,8 @@
 # Plan
 1. Do all easy problems of a particular tag first;
 2. After finishing all easy problems of one tag, move to next tag's easy problems and start current tag's medium-hard problems
+    - since more tags are done, I choose to do medium problems on tag basis.
+    - eg: do 1 medium tag A on day 1, 1 medium tag B on day 2... in a loop
 3. Repeat steps 1, 2
 
 # Example
