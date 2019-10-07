@@ -1,39 +1,62 @@
 #include <string>
 #include <iostream>
 #include <cmath>
+#include <cassert>
+#include <algorithm>
+#include <climits>
 using namespace std;
+
+#define SIZE INT_MAX
+// waste a lot of time on implementing directly...
+// when I asked myself how would I do if I were the machine
+// well, I first tried converting 10-base to 2-base to see the pattern
+// then tried converting 10-base to 26-base
+// so... lesson here
+// **think twice, code once**
+// ask yourself how would you do (try some cases)
+
+// Runtime: 4 ms, faster than 48.14% of C++ online submissions for Excel Sheet Column Title.
+// Memory Usage: 8.1 MB, less than 100.00% of C++ online submissions for Excel Sheet Column Title.
+
 class Solution {
 public:
-    string convertToTitle(int n) {
-        if (n == 0) return "";
+    string convertToTitle(int n) { // LC168
         string res = "";
-        int co = 0;
-        int i = 0;
-        while (co < n) {
-            co = pow(26, i++);
+        while (n > 0) {
+            int c = n % 26;
+            if (c != 0) {
+                res += char(c-1+'A');
+            }
+            else {
+                res += 'Z';
+                n -= 26;
+            }
+            n = n / 26;
         }
-        i -= 1;
-        cout << "n <= " << co << " | " << i << endl;
-        while (i-- > 0) {
-            int temp = n % 26;
-            res += string(1, char(temp+'A'));
-            n -= pow(26, i);
-        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+
+    int titleToNumber(string s) {   // LC171
+        int res = 0;
+        int len = s.length()-1;
+        for (char c : s)
+            
         return res;
     }
 };
 
 
+
 int main() {
-    for (int i = 0; i < 10; i++) {
-        cout << pow(26, i) << " ";
+    cout << "test size = " << SIZE << endl;
+    for (int i = 0; i < SIZE; i++) {
+        cout << i << endl;
+        string x = Solution().convertToTitle(i);
+        if (i != Solution().titleToNumber(x)) {
+            cerr << "error @ " << i << endl;
+            break;
+        }
     }
-    cout << endl;
-    cout << Solution().convertToTitle(0) << endl;
-    cout << Solution().convertToTitle(1) << endl;
-    cout << Solution().convertToTitle(2) << endl;
-    cout << Solution().convertToTitle(28) << endl;
-    cout << Solution().convertToTitle(26) << endl;
-    cout << Solution().convertToTitle(701) << endl;
     return 0;
 }

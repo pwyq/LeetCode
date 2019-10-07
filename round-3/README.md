@@ -36,5 +36,6 @@ Started on Sept 23
 | Array | Sept 27 | | |
 | Hash Table | Oct 2 | | |
 | Linked List | Oct 3 | | |
-| Math | | | |
+| Math | Oct 8 | | |
+| DP | | | |
 
