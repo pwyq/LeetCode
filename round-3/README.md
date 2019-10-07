@@ -3,6 +3,7 @@
 1. Do problems by tags
 2. Do problems by difficulty (from easy->medium->hard)
 3. Do problems by acceptance (from high to low)
+4. Participate in contest as many as possible
 
 # Plan
 1. Do all easy problems of a particular tag first;
@@ -10,6 +11,9 @@
     - since more tags are done, I choose to do medium problems on tag basis.
     - eg: do 1 medium tag A on day 1, 1 medium tag B on day 2... in a loop
 3. Repeat steps 1, 2
+
+# Contest Plan
+- Do weekly/bi-weekly contest on weekends, review non-AC problems on the next day and try to solve it; if cannot, see top ranked users' solution (and do it yourself again)
 
 # Example
 

@@ -1,3 +1,4 @@
+// DID NOT PASS
 #include <iostream>
 #include <vector>
 #include <climits>
@@ -90,3 +91,73 @@ int main() {
     assert(r3==60);
     return 0;
 }
+
+
+/*
+int N;
+vector<int> gold;
+vector<vector<int>> adj;
+unordered_map<int, int> save;
+
+int solve(int current, int mask) {
+    int key = (current << N) + mask;
+
+    if (save.find(key) != save.end())
+        return save[key];
+
+    int answer = 0;
+
+    for (int neighbor : adj[current])
+        if ((mask >> neighbor & 1) == 0)
+            answer = max(answer, gold[neighbor] + solve(neighbor, mask | 1 << neighbor));
+
+    return save[key] = answer;
+}
+
+class Solution {
+public:
+    int getMaximumGold(vector<vector<int>>& grid) {
+        int R = grid.size(), C = grid.empty() ? 0 : grid[0].size();
+        vector<vector<int>> gold_index(R, vector<int>(C, -1));
+        gold.clear();
+        N = 0;
+
+        for (int r = 0; r < R; r++)
+            for (int c = 0; c < C; c++)
+                if (grid[r][c] > 0) {
+                    gold.push_back(grid[r][c]);
+                    gold_index[r][c] = N++;
+                }
+
+        adj.assign(N, {});
+
+        for (int r = 0; r < R; r++)
+            for (int c = 0; c < C; c++) {
+                int index = gold_index[r][c];
+
+                if (index < 0)
+                    continue;
+
+                if (r > 0 && grid[r - 1][c] > 0)
+                    adj[index].push_back(gold_index[r - 1][c]);
+
+                if (c > 0 && grid[r][c - 1] > 0)
+                    adj[index].push_back(gold_index[r][c - 1]);
+
+                if (r + 1 < R && grid[r + 1][c] > 0)
+                    adj[index].push_back(gold_index[r + 1][c]);
+
+                if (c + 1 < C && grid[r][c + 1] > 0)
+                    adj[index].push_back(gold_index[r][c + 1]);
+            }
+
+        save.clear();
+        int best = 0;
+
+        for (int i = 0; i < N; i++)
+            best = max(best, gold[i] + solve(i, 1 << i));
+
+        return best;
+    }
+};
+*/
