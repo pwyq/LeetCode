@@ -3,7 +3,9 @@
 1. Do problems by tags
 2. Do problems by difficulty (from easy->medium->hard)
 3. Do problems by acceptance (from high to low)
-4. Participate in contest as many as possible
+4. ~Participate in contest as many as possible~
+    - I would say if you have time, then participate
+    - As currently, it's not efficient ot participate since you can't even do all the problems...
 
 # Plan
 1. Do all easy problems of a particular tag first;
